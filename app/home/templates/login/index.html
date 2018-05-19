@@ -1,0 +1,26 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-md-offset-4 col-md-4">
+            <h1>Login</h1>
+            <strong>{{ message }}</strong>
+            <form method="POST">
+                <div class="form-group">
+                    {{ form.email.label(class_="form-label") }}
+                    {{ form.email(class_="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ form.password.label(class_="form-label") }}
+                    {{ form.password(class_="form-control") }}
+                </div>
+
+                {{ form.submit(class_="btn btn-success pull-right") }}
+
+            </form>
+        </div>
+      </div>
+</div>
+{% endblock %}
