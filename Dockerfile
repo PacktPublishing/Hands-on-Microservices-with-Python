@@ -2,7 +2,7 @@ FROM python:3-alpine
 
 MAINTAINER Peter Fisher
 
-COPY app /app
+COPY ./app /app
 
 WORKDIR /app
 

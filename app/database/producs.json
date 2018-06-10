@@ -1,0 +1,9 @@
+{
+  "1": {
+    "name" : "Python Flask",
+    "link": "",
+    "price": "£200",
+    "in_stock" : 1,
+    "image": ""
+  }
+}
