@@ -6,6 +6,11 @@
   <div class="row">
       <div class="col-md-offset-4 col-md-4">
             <h1>Home Page</h1>
+          {% for product in products %}
+          <div class="">
+              <h2>{{product.name}}</h2>
+          </div>
+          {% endfor %}
         </div>
       </div>
 </div>

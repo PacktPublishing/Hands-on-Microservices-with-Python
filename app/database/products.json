@@ -1,9 +1,64 @@
-{
-  "1": {
-    "name" : "Python Flask",
+[{
+    "name" : "Product 1",
+    "link": "",
+    "price": "£200",
+    "in_stock" : 1,
+    "image": ""
+  },
+  {
+    "name" : "Product 2",
+    "link": "",
+    "price": "£200",
+    "in_stock" : 1,
+    "image": ""
+  },
+  {
+    "name" : "Product 3",
+    "link": "",
+    "price": "£200",
+    "in_stock" : 1,
+    "image": ""
+  },
+  {
+    "name" : "Product 4",
+    "link": "",
+    "price": "£200",
+    "in_stock" : 1,
+    "image": ""
+  },
+  {
+    "name" : "Product 5",
+    "link": "",
+    "price": "£200",
+    "in_stock" : 1,
+    "image": ""
+  },
+    {
+    "name" : "Product 6",
+    "link": "",
+    "price": "£200",
+    "in_stock" : 1,
+    "image": ""
+  },
+  {
+    "name" : "Product 7",
+    "link": "",
+    "price": "£200",
+    "in_stock" : 1,
+    "image": ""
+  },
+  {
+    "name" : "Product 8",
+    "link": "",
+    "price": "£200",
+    "in_stock" : 1,
+    "image": ""
+  },
+  {
+    "name" : "Product 9",
     "link": "",
     "price": "£200",
     "in_stock" : 1,
     "image": ""
   }
-}
+]

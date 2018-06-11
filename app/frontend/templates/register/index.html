@@ -1,13 +1,21 @@
 {% extends "bootstrap/base.html" %}
-{% block title %}Login{% endblock %}
+{% block title %}Register{% endblock %}
 
 {% block content %}
 <div class="container-fluid">
   <div class="row">
       <div class="col-md-offset-4 col-md-4">
-            <h1>Login</h1>
+            <h1>Register</h1>
             <strong>{{ message }}</strong>
             <form method="POST">
+                <div class="form-group">
+                    {{ form.firstName.label(class_="form-label") }}
+                    {{ form.firstName(class_="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ form.lastName.label(class_="form-label") }}
+                    {{ form.lastName(class_="form-control") }}
+                </div>
                 <div class="form-group">
                     {{ form.email.label(class_="form-label") }}
                     {{ form.email(class_="form-control") }}
