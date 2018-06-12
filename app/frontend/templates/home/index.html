@@ -1,15 +1,21 @@
-{% extends "base_col_2.html" %}
+{% extends "base_col_1.html" %}
 {% block title %}Home Page{% endblock %}
 
 {% block pageContent %}
 
-<h1>Home Page</h1>
 {% for product in products %}
     {% set url = "/product/" + product.slug %}
     <div class="col-md-4">
-      <h2>{{product.name}}</h2>
-      <img src="{{product.img}}" />
-      <a class="btn btn-success" href="{{url}}">View more</a>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">{{product.name}}</h2>
+            </div>
+            <div class="panel-body">
+                <img src="{{product.img}}" />
+          <a class="btn btn-success" href="{{url}}">View more</a>
+            </div>
+        </div>
     </div>
     {% endfor %}
+    </div>
 {% endblock %}
