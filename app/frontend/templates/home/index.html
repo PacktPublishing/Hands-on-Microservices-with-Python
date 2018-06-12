@@ -1,17 +1,15 @@
-{% extends "bootstrap/base.html" %}
+{% extends "base_col_2.html" %}
 {% block title %}Home Page{% endblock %}
 
-{% block content %}
-<div class="container-fluid">
-  <div class="row">
-      <div class="col-md-offset-4 col-md-4">
-            <h1>Home Page</h1>
-          {% for product in products %}
-          <div class="">
-              <h2>{{product.name}}</h2>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-</div>
+{% block pageContent %}
+
+<h1>Home Page</h1>
+{% for product in products %}
+    {% set url = "/product/" + product.slug %}
+    <div class="col-md-4">
+      <h2>{{product.name}}</h2>
+      <img src="{{product.img}}" />
+      <a class="btn btn-success" href="{{url}}">View more</a>
+    </div>
+    {% endfor %}
 {% endblock %}

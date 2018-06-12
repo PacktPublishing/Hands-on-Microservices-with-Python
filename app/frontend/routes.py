@@ -56,11 +56,11 @@ def logout():
 
 
 # Product page
-@frontend_blueprint.route('/product/<id>', methods=['GET'])
-def product(id):
+@frontend_blueprint.route('/product/<slug>', methods=['GET'])
+def product(slug):
     data = []
     # Make API request to /api/products
-    # r = requests.get('http://192.168.99.100/api/product/id')
+    # r = requests.get('http://192.168.99.100/api/product/slug')
     # data = r.json
     return render_template('product/index.html', product=data)
 
