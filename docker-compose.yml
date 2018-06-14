@@ -11,6 +11,10 @@ services:
       - 80:5000
     volumes:
       - ./app:/app
+    links:
+      - db
+    depends_on:
+      - db
 
   db:
     image: mysql:5.7.22
@@ -19,4 +23,4 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=test
       - MYSQL_DATABASE=order
-
+    restart: always
