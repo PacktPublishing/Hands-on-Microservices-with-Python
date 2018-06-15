@@ -1,43 +1,46 @@
-from flask import make_response, json, abort
+from flask import make_response, json, abort, request, jsonify
 from . import user_api_blueprint
-
-with open('database/users.json') as f:
-    data = json.load(f)
+from models import db, Customer
 
 
 @user_api_blueprint.route('/api/users', methods=['GET'])
-def users():
+def get_users():
+    data = []
+    for row in Customer.query.all():
+        data.append(row.to_json())
 
-    response = make_response(json.dumps(data, indent=4))
+    response = jsonify(data)
 
     return response
 
 
-@user_api_blueprint.route('/api/user/<username>', methods=['GET'])
-def user(username):
-    if username not in data:
+@user_api_blueprint.route('/api/user/<email>', methods=['GET'])
+def get_user(email):
+
+    data = Customer.query.filter_by(email=email).first()
+    if data is None:
         abort(404)
 
-    response = make_response(json.dumps(data[username], indent=4))
+    response = make_response(jsonify(data.to_json()))
 
     return response
 
 
 @user_api_blueprint.route('/api/user/register', methods=['POST'])
-def register(username):
-    if username not in data:
-        abort(404)
+def post_register():
 
-    response = make_response(json.dumps(data[username], indent=4))
+    first_name = request.form['first_name']
+    last_name = request.form['last_name']
+    email = request.form['email_address']
 
-    return response
+    user = Customer()
+    user.email = email
+    user.firstName = first_name
+    user.lastName = last_name
 
+    db.session.add(user)
+    db.session.commit()
 
-@user_api_blueprint.route('/api/user/login', methods=['POST'])
-def login(username):
-    if username not in data:
-        abort(404)
-
-    response = make_response(json.dumps(data[username], indent=4))
+    response = jsonify({'message': 'Customer added', 'customer': user.to_json()})
 
     return response
