@@ -1,20 +1,18 @@
 {
-	"variables": [],
 	"info": {
 		"name": "Order-System",
-		"_postman_id": "b1ab46b5-09c2-f02a-c156-ddf4984bf582",
+		"_postman_id": "39cf4c42-34cb-404c-896a-4bb3525a97b5",
 		"description": "",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "User",
-			"description": "",
+			"description": null,
 			"item": [
 				{
 					"name": "Register a user",
 					"request": {
-						"url": "192.168.99.100/api/user/register",
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -23,21 +21,115 @@
 								{
 									"key": "first_name",
 									"value": "Peter1",
-									"type": "text",
-									"enabled": true
+									"type": "text"
 								},
 								{
 									"key": "last_name",
 									"value": "Fisher2",
-									"type": "text",
-									"enabled": true
+									"type": "text"
 								},
 								{
 									"key": "email_address",
 									"value": "foof@bar.com",
-									"type": "text",
-									"enabled": true
+									"type": "text"
 								}
+							]
+						},
+						"url": {
+							"raw": "192.168.99.100/api/user/register",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"100"
+							],
+							"path": [
+								"api",
+								"user",
+								"register"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Get User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "192.168.99.100/api/user/foo@bar.com",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"100"
+							],
+							"path": [
+								"api",
+								"user",
+								"foo@bar.com"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "192.168.99.100/api/users",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"100"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"description": "",
+			"item": [
+				{
+					"name": "Get Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://192.168.99.102/api/products",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"102"
+							],
+							"path": [
+								"api",
+								"products"
 							]
 						},
 						"description": ""
@@ -45,23 +137,79 @@
 					"response": []
 				},
 				{
-					"name": "Get User",
+					"name": "Create Product",
 					"request": {
-						"url": "192.168.99.100/api/user/foo@bar.com",
-						"method": "GET",
+						"method": "POST",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Product 1",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "slug",
+									"value": "product-1",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"value": "banana.png",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "2",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://192.168.99.102/api/product/create",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"102"
+							],
+							"path": [
+								"api",
+								"product",
+								"create"
+							]
+						},
 						"description": ""
 					},
 					"response": []
 				},
 				{
-					"name": "Get All Users",
+					"name": "Get Product",
 					"request": {
-						"url": "192.168.99.100/api/users",
 						"method": "GET",
 						"header": [],
 						"body": {},
+						"url": {
+							"raw": "http://192.168.99.102/api/product/product-1",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"102"
+							],
+							"path": [
+								"api",
+								"product",
+								"product-1"
+							]
+						},
 						"description": ""
 					},
 					"response": []
