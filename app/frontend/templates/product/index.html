@@ -1,6 +1,28 @@
-{% extends "base_col_2.html" %}
-{% block title %}Product Page{% endblock %}
+{% extends "base_col_1.html" %}
+{% block title %}Product page{% endblock %}
 
 {% block pageContent %}
-    <h1>Product:</h1>
+
+    {% set url = "/product/" + product.slug %}
+    {% set imageSRC = "images/" + product.image %}
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">{{product.name}}</h2>
+            </div>
+            <div class="panel-body">
+                <div class="img-block">
+                    <img src="{{ url_for('static', filename=imageSRC)}}" width="100%"/>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="container">
+                    <div class="label label-default">Price: {{ product.price }}</div>
+                    <a class="btn btn-success" href="{{url}}">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 {% endblock %}

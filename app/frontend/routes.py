@@ -1,4 +1,5 @@
-from flask import render_template, json
+from flask import render_template, json, abort
+import requests
 from . import forms
 from . import frontend_blueprint
 
@@ -9,11 +10,13 @@ with open('database/products.json') as f:
 # Home page
 @frontend_blueprint.route('/', methods=['GET'])
 def home():
-    # Make API request to /api/products
-    # r = requests.get('http://192.168.99.100/api/products')
-    # data = r.json
+    try:
+        r = requests.get('http://192.168.99.102/api/products')
+        products = r.json()
+    except requests.exceptions.ConnectionError:
+        products = []
 
-    return render_template('home/index.html', products=data)
+    return render_template('home/index.html', products=products)
 
 
 # Login
@@ -58,11 +61,14 @@ def logout():
 # Product page
 @frontend_blueprint.route('/product/<slug>', methods=['GET'])
 def product(slug):
-    data = []
-    # Make API request to /api/products
-    # r = requests.get('http://192.168.99.100/api/product/slug')
-    # data = r.json
-    return render_template('product/index.html', product=data)
+    item = {}
+    try:
+        r = requests.get('http://192.168.99.102/api/product/' + slug)
+        item = r.json()
+    except requests.exceptions.ConnectionError:
+        abort(404)
+
+    return render_template('product/index.html', product=item)
 
 
 # Order page

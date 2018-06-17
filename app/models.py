@@ -33,6 +33,7 @@ class Customer(db.Model):
             'email_address': self.email
         }
 
+
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), unique=True, nullable=False)
@@ -41,6 +42,15 @@ class Product(db.Model):
     image = db.Column(db.String(120), unique=False, nullable=True)
     dateAdded = db.Column(db.DateTime, default=datetime.utcnow)
     dateUpdated = db.Column(db.DateTime, onupdate=datetime.utcnow)
+
+    def to_json(self):
+        return {
+            'name': self.name,
+            'slug': self.slug,
+            'price': self.price,
+            'image': self.image
+        }
+
 
 
 class Order(db.Model):

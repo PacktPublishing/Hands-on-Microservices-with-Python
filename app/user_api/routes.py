@@ -1,4 +1,4 @@
-from flask import make_response, json, abort, request, jsonify
+from flask import make_response, abort, request, jsonify
 from . import user_api_blueprint
 from models import db, Customer
 

@@ -3,7 +3,10 @@
 
 {% block pageContent %}
 
-{% for product in products %}
+
+{% if products | length > 0 %}
+    {% for product in products %}
+
     {% set url = "/product/" + product.slug %}
     {% set imageSRC = "images/" + product.image %}
     <div class="col-md-4">
@@ -25,5 +28,9 @@
         </div>
     </div>
     {% endfor %}
-    </div>
+
+{% else %}
+    <strong>No products found</strong>
+{% endif %}
+
 {% endblock %}
