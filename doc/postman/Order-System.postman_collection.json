@@ -1,0 +1,72 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Order-System",
+		"_postman_id": "b1ab46b5-09c2-f02a-c156-ddf4984bf582",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"description": "",
+			"item": [
+				{
+					"name": "Register a user",
+					"request": {
+						"url": "192.168.99.100/api/user/register",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "first_name",
+									"value": "Peter1",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "last_name",
+									"value": "Fisher2",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "email_address",
+									"value": "foof@bar.com",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get User",
+					"request": {
+						"url": "192.168.99.100/api/user/foo@bar.com",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users",
+					"request": {
+						"url": "192.168.99.100/api/users",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
