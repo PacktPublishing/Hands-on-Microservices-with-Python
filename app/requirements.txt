@@ -18,6 +18,7 @@ jmespath==0.9.3
 MarkupSafe==1.0
 mysql-connector==2.1.6
 mysqlclient==1.3.12
+passlib==1.7.1
 post==1.0.2
 public==1.0.3
 pyasn1==0.3.7
