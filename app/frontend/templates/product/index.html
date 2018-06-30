@@ -18,11 +18,36 @@
             <div class="panel-footer">
                 <div class="container">
                     <div class="label label-default">Price: {{ product.price }}</div>
-                    <a class="btn btn-success" href="{{url}}">Buy Now</a>
+                    <form method="POST" action="/order/add-item">
+                        <input type="hidden" name="product_id" value="{{ product.slug }}" />
+
+                        <button type="submit" class="btn btn-success" id="buy-now">Buy Now</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 
+<script>
 
+
+    $(function() {
+    $('#buy-nowq').click(function() {
+    console.log('running');
+        $.ajax({
+            url: '/order/add-item',
+            data: $('form').serialize(),
+            type: 'POST',
+            success: function(response) {
+                console.log('a');
+                console.log(response);
+            },
+            error: function(error) {
+                console.log('b');
+                console.log(error);
+            }
+        });
+    });
+});
+</script>
 {% endblock %}

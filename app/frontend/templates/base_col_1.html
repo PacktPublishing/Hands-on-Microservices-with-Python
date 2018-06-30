@@ -1,12 +1,10 @@
-{% extends "bootstrap/base.html" %}
-{% block styles %}
-    {{ super() }}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
-{% endblock %}
+{% extends "base.html" %}
+
 {% block content %}
 {% include 'nav_header.html' %}
     <div class="container" id="outer-container">
 
+        {% include '_messages.html' %}
         {% block pageContent %} {% endblock %}
 
     </div>

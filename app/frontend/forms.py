@@ -1,17 +1,25 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, HiddenField, IntegerField
 from wtforms.validators import DataRequired, Email
 
 
 class LoginForm(FlaskForm):
-    email = StringField('Email address', validators=[DataRequired(), Email()])
+    username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Login')
 
 
 class RegisterForm(FlaskForm):
-    firstName = StringField('First name', validators=[DataRequired()])
-    lastName = StringField('last name', validators=[DataRequired()])
+    username = StringField('Username', validators=[DataRequired()])
+    first_name = StringField('First name', validators=[DataRequired()])
+    last_name = StringField('last name', validators=[DataRequired()])
     email = StringField('Email address', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Register')
+
+
+class OrderItemForm(FlaskForm):
+    product_id = HiddenField(validators=[DataRequired()])
+    quantity = IntegerField(validators=[DataRequired()])
+    order_id = HiddenField()
+    submit = SubmitField('Update')

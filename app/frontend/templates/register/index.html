@@ -1,30 +1,20 @@
 {% extends "base_col_1.html" %}
+{% from "_form_macros.html" import render_field %}
 {% block title %}Register{% endblock %}
 
 {% block pageContent %}
+    <h1>Register</h1>
+    <strong>{{ message }}</strong>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ render_field(form.username) }}
+        {{ render_field(form.first_name) }}
+        {{ render_field(form.last_name) }}
+        {{ render_field(form.email) }}
+        {{ render_field(form.password) }}
 
-            <h1>Register</h1>
-            <strong>{{ message }}</strong>
-            <form method="POST">
-                <div class="form-group">
-                    {{ form.firstName.label(class_="form-label") }}
-                    {{ form.firstName(class_="form-control") }}
-                </div>
-                <div class="form-group">
-                    {{ form.lastName.label(class_="form-label") }}
-                    {{ form.lastName(class_="form-control") }}
-                </div>
-                <div class="form-group">
-                    {{ form.email.label(class_="form-label") }}
-                    {{ form.email(class_="form-control") }}
-                </div>
-                <div class="form-group">
-                    {{ form.password.label(class_="form-label") }}
-                    {{ form.password(class_="form-control") }}
-                </div>
+        {{ form.submit(class_="btn btn-success pull-right") }}
 
-                {{ form.submit(class_="btn btn-success pull-right") }}
-
-            </form>
+    </form>
 
 {% endblock %}

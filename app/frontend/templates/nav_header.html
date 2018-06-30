@@ -5,8 +5,20 @@
                 <li><a href="/">Home</a></li>
             </ul>
             <ul class="nav navbar-nav pull-right">
-                <li><a href="/login">Login</a></li>
-                <li><a href="/register">Register</a></li>
+                {% if not session.username %}
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/register">Register</a></li>
+                {% else %}
+                    <li><a href="/logout">Logout</a></li>
+                {% endif %}
+
+                <li><a href="/checkout">Checkout <span class="badge">
+                    {% if order is defined %}
+                        {{ order.item_num | default(0)}}
+                    {% else %}
+                        0
+                    {% endif %}
+                    </span></a></li>
             </ul>
         </div>
     </nav>

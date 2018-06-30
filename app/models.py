@@ -17,31 +17,35 @@ def create_tables(app):
     return engine
 
 
-class Customer(db.Model):
+class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    firstName = db.Column(db.String(120), unique=False, nullable=True)
-    lastName = db.Column(db.String(120), unique=False, nullable=True)
+    username = db.Column(db.String(255), unique=True, nullable=False)
+    email = db.Column(db.String(255), unique=True, nullable=False)
+    first_name = db.Column(db.String(255), unique=False, nullable=True)
+    last_name = db.Column(db.String(255), unique=False, nullable=True)
+    password = db.Column(db.String(255), unique=False, nullable=False)
     orders = db.relationship('Order', backref='order')
-    dateAdded = db.Column(db.DateTime, default=datetime.utcnow)
-    dateUpdated = db.Column(db.DateTime, onupdate=datetime.utcnow)
+    date_added = db.Column(db.DateTime, default=datetime.utcnow)
+    date_updated = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
     def to_json(self):
         return {
-            'first_name': self.firstName,
-            'last_name': self.lastName,
-            'email_address': self.email
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'username': self.username,
+            'email': self.email,
+            'id': self.id,
         }
 
 
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), unique=True, nullable=False)
-    slug = db.Column(db.String(120), unique=True, nullable=False)
+    name = db.Column(db.String(255), unique=True, nullable=False)
+    slug = db.Column(db.String(255), unique=True, nullable=False)
     price = db.Column(db.Integer, nullable=False)
-    image = db.Column(db.String(120), unique=False, nullable=True)
-    dateAdded = db.Column(db.DateTime, default=datetime.utcnow)
-    dateUpdated = db.Column(db.DateTime, onupdate=datetime.utcnow)
+    image = db.Column(db.String(255), unique=False, nullable=True)
+    date_added = db.Column(db.DateTime, default=datetime.utcnow)
+    date_updated = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
     def to_json(self):
         return {
@@ -52,20 +56,27 @@ class Product(db.Model):
         }
 
 
-
 class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'))
-    image = db.Column(db.String(120), unique=False, nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    image = db.Column(db.String(255), unique=False, nullable=True)
     items = db.relationship('OrderItem', backref='orderItem')
-    dateAdded = db.Column(db.DateTime, default=datetime.utcnow)
-    dateUpdated = db.Column(db.DateTime, onupdate=datetime.utcnow)
+    date_added = db.Column(db.DateTime, default=datetime.utcnow)
+    date_updated = db.Column(db.DateTime, onupdate=datetime.utcnow)
+
+    def to_json(self):
+        return {
+            'image': self.name,
+            'items': self.itemst,
+            'user': self.price,
+            'image': self.image
+        }
 
 
 class OrderItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     order_id = db.Column(db.Integer, db.ForeignKey('order.id'))
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
-    dateAdded = db.Column(db.DateTime, default=datetime.utcnow)
-    dateUpdated = db.Column(db.DateTime, onupdate=datetime.utcnow)
+    date_added = db.Column(db.DateTime, default=datetime.utcnow)
+    date_updated = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
