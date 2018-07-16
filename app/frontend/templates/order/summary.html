@@ -3,6 +3,21 @@
 
 {% block pageContent %}
 <h1>Summary</h1>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <table width="100%">
 
-
+        {% for item in order['result']['items'] %}
+        <tr>
+            <td></td>
+            <td>{{ item.product.name }}</td>
+            <td>
+                {% set field_name = 'quantity_' ~ loop.index %}
+                {{ form[field_name] }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {{ form.submit(class_="btn btn-success pull-right") }}
+</form>
 {% endblock %}
