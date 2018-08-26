@@ -1,4 +1,4 @@
-from flask import render_template, json, session, redirect, url_for, flash, request
+from flask import render_template, json, session, redirect, url_for, flash, request, current_app
 import requests
 from flask_login import current_user, login_user
 from . import forms, api
@@ -13,7 +13,7 @@ def get_order():
         'Authorization': 'Basic ' + session['user_api_key']
     }
 
-    response = requests.request(method="GET", url='http://192.168.99.102/api/order', headers=headers)
+    response = requests.request(method="GET", url=current_app.config['API_URI'] + '/api/order', headers=headers)
     order = response.json()
     return order
 
@@ -23,9 +23,14 @@ def get_user():
         'Authorization': 'Basic ' + session['user_api_key']
     }
 
-    response = requests.request(method="GET", url='http://192.168.99.102/api/user', headers=headers)
+    response = requests.request(method="GET", url=current_app.config['API_URI'] + '/api/user', headers=headers)
     user = response.json()
     return user
+
+
+def get_username(username):
+    response = requests.request(method="GET", url=current_app.config['API_URI'] + '/api/user/' + username + '/exists')
+    return response.status_code == 200
 
 
 def get_order_from_session():
@@ -37,7 +42,7 @@ def get_order_from_session():
 
 
 def get_product(slug):
-    response = requests.request(method="GET", url='http://192.168.99.102/api/product/' + slug)
+    response = requests.request(method="GET", url=current_app.config['API_URI'] + '/api/product/' + slug)
     product = response.json()
     return product
 
@@ -51,8 +56,7 @@ def post_user_create(form):
         'last_name': form.last_name.data,
         'username': form.username.data
     }
-    url = 'http://192.168.99.102/api/user/create'
-    response = requests.request("POST", url=url, data=payload)
+    response = requests.request("POST", url=current_app.config['API_URI'] + '/api/user/create', data=payload)
     if response:
         user = response.json()
     return user
@@ -64,8 +68,7 @@ def post_login(form):
         'username': form.username.data,
         'password': form.password.data,
     }
-    url = 'http://192.168.99.102/api/user/login'
-    response = requests.request("POST", url=url, data=payload)
+    response = requests.request("POST", url=current_app.config['API_URI'] + '/api/user/login', data=payload)
     if response:
         d = response.json()
         if d['api_key'] is not None:
@@ -78,11 +81,10 @@ def post_add_to_cart(product_id, qty=1):
         'product_id': product_id,
         'qty': qty,
     }
-    url = 'http://192.168.99.102/api/order/add-item'
     headers = {
         'Authorization': 'Basic ' + session['user_api_key']
     }
-    response = requests.request("POST", url=url, data=payload, headers=headers)
+    response = requests.request("POST", url=current_app.config['API_URI'] + '/api/order/add-item', data=payload, headers=headers)
     if response:
         order = response.json()
 
@@ -91,11 +93,10 @@ def post_add_to_cart(product_id, qty=1):
 
 def update_order(items):
 
-    url = 'http://192.168.99.102/api/order/update'
     headers = {
         'Authorization': 'Basic ' + session['user_api_key']
     }
-    response = requests.request("POST", url=url, data=items, headers=headers)
+    response = requests.request("POST", url=current_app.config['API_URI'] + '/api/order/update', data=items, headers=headers)
     if response:
         order = response.json()
 
@@ -111,7 +112,7 @@ def home():
         session['order'] = order['result']
 
     try:
-        r = requests.get('http://192.168.99.102/api/products')
+        r = requests.get(current_app.config['API_URI'] + '/api/products')
         products = r.json()
 
     except requests.exceptions.ConnectionError:
@@ -163,7 +164,7 @@ def register():
             username = form.username.data
 
             # Search for existing
-            user = get_user(username)
+            user = get_username(username)
             if user:
                 # Existing user found
                 flash('Please try another username', 'error')

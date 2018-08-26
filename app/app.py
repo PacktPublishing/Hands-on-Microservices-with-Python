@@ -22,6 +22,8 @@ app.config.update(dict(
     SECRET_KEY="powerful secretkey",
     WTF_CSRF_SECRET_KEY="a csrf secret key",
     SQLALCHEMY_DATABASE_URI='mysql+mysqlconnector://root:test@db/order_sys',
+    SQLALCHEMY_TRACK_MODIFICATIONS='false',
+    API_URI='http://192.168.99.100'
 ))
 
 models.init_app(app)
@@ -66,7 +68,6 @@ app.session_interface = CustomSessionInterface()
 @user_loaded_from_header.connect
 def user_loaded_from_header(self, user=None):
     g.login_via_header = True
-
 
 
 if __name__ == '__main__':
