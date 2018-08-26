@@ -20,7 +20,7 @@
 							"formdata": [
 								{
 									"key": "first_name",
-									"value": "Peter1",
+									"value": "Peter2",
 									"type": "text"
 								},
 								{
@@ -29,24 +29,37 @@
 									"type": "text"
 								},
 								{
-									"key": "email_address",
+									"key": "email",
 									"value": "foof@bar.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "test",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "test",
+									"description": "",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "192.168.99.100/api/user/register",
+							"raw": "http://192.168.99.102/api/user/create",
+							"protocol": "http",
 							"host": [
 								"192",
 								"168",
 								"99",
-								"100"
+								"102"
 							],
 							"path": [
 								"api",
 								"user",
-								"register"
+								"create"
 							]
 						},
 						"description": null
@@ -63,17 +76,70 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "192.168.99.100/api/user/foo@bar.com",
+							"raw": "192.168.99.102/api/user",
 							"host": [
 								"192",
 								"168",
 								"99",
-								"100"
+								"102"
+							],
+							"path": [
+								"api",
+								"user"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Post User Logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "192.168.99.102/api/user/logout",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"102"
 							],
 							"path": [
 								"api",
 								"user",
-								"foo@bar.com"
+								"logout"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "192.168.99.102/api/user/test",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"102"
+							],
+							"path": [
+								"api",
+								"user",
+								"test"
 							]
 						},
 						"description": null
@@ -90,12 +156,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "192.168.99.100/api/users",
+							"raw": "192.168.99.102/api/users",
 							"host": [
 								"192",
 								"168",
 								"99",
-								"100"
+								"102"
 							],
 							"path": [
 								"api",
@@ -103,6 +169,80 @@
 							]
 						},
 						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "POST login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "test3",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "test3",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "192.168.99.102/api/user/login",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"102"
+							],
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Open Order",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic $5$rounds=535000$QMGhL/W9cFB2uFUA$VyaIhbNBJ5he6hUIK8v7UVBJXo.bExb3rOFbYvU0tJ0"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://192.168.99.102/api/order",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"102"
+							],
+							"path": [
+								"api",
+								"order"
+							]
+						},
+						"description": ""
 					},
 					"response": []
 				}
@@ -208,6 +348,66 @@
 								"api",
 								"product",
 								"product-1"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"description": "",
+			"item": [
+				{
+					"name": "Get Order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://192.168.99.102/api/order",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"102"
+							],
+							"path": [
+								"api",
+								"order"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Post Add Item",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic $5$rounds=535000$vwJSjz6Q9rFfZg73$JbaCPueXwpbdCOgFz/QqmZL9hHOVluPfpONwNOqvXx8"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://192.168.99.102/api/order/add-item",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"102"
+							],
+							"path": [
+								"api",
+								"order",
+								"add-item"
 							]
 						},
 						"description": ""
