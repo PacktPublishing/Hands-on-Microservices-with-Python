@@ -35,9 +35,7 @@ def order_add_item():
         known_order.is_open = True
         known_order.user_id = u_id
 
-        order_item = OrderItem()
-        order_item.product_id = p_id
-        order_item.quantity = qty
+        order_item = OrderItem(p_id, qty)
         known_order.items.append(order_item)
 
     else:
@@ -50,8 +48,7 @@ def order_add_item():
                 item.quantity += qty
 
         if found is False:
-            order_item = OrderItem()
-            order_item.product_id = p_id
+            order_item = OrderItem(p_id, qty)
             known_order.items.append(order_item)
 
     db.session.add(known_order)

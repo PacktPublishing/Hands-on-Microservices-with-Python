@@ -1,0 +1,10 @@
+{{ session['order'] | pprint }}
+{% macro count_items()%}
+{% set counter = namespace(a=0) %}
+    {% if session['order'] %}
+        {% for item in session['order']['items'] %}
+            {% set counter.a = counter.a + item['quantity'] %}
+        {% endfor %}
+    {% endif %}
+{{ counter.a }}
+{% endmacro %}

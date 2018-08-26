@@ -22,7 +22,7 @@ def products():
 def product(slug):
     item = Product.query.filter_by(slug=slug).first()
     if item is not None:
-        response = jsonify(item.to_json())
+        response = jsonify({'result' : item.to_json() })
     else:
         response = jsonify({'message': 'Cannot find product'}), 404
 

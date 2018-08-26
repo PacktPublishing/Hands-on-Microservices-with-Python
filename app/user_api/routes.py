@@ -1,8 +1,9 @@
-from flask import make_response, abort, request, jsonify
+from flask import make_response, request, jsonify
+from flask_login import current_user, login_user, logout_user
 from passlib.hash import sha256_crypt
 from . import user_api_blueprint
 from models import db, User
-
+from flask_login import login_required, current_user
 
 @user_api_blueprint.route('/api/users', methods=['GET'])
 def get_users():
@@ -15,16 +16,39 @@ def get_users():
     return response
 
 
-@user_api_blueprint.route('/api/user/<username>', methods=['GET'])
-def get_user(username):
+@user_api_blueprint.route('/api/user/login', methods=['POST'])
+def post_login():
 
-    data = User.query.filter_by(username=username).first()
-    if data:
-        response = make_response(jsonify(data.to_json()))
-    else:
-        response = make_response(jsonify({'message': 'Cannot find user'}), 404)
+    username = request.form['username']
+    user = User.query.filter_by(username=username).first()
+    if user:
+        if sha256_crypt.verify(str(request.form['password']), user.password):
+            user.encode_api_key()
+            db.session.commit()
+            login_user(user)
 
-    return response
+            return make_response(jsonify({'message': 'Logged in', 'api_key': user.api_key}))
+
+    return make_response(jsonify({'message': 'Not logged in'}), 401)
+
+
+@user_api_blueprint.route('/api/user/logout', methods=['POST'])
+def post_logout():
+
+    if current_user.is_authenticated:
+        logout_user()
+        return make_response(jsonify({'message': 'You are no longer logged in'}))
+
+    return make_response(jsonify({'message': 'You are not logged in'}))
+
+@login_required
+@user_api_blueprint.route('/api/user', methods=['GET'])
+def get_user():
+
+    if current_user.is_authenticated:
+        return make_response(jsonify({'result': current_user.to_json()}), 404)
+
+    return make_response(jsonify({'message': 'Not logged in'}), 401)
 
 
 @user_api_blueprint.route('/api/user/create', methods=['POST'])
@@ -35,7 +59,7 @@ def post_register():
     email = request.form['email']
     username = request.form['username']
 
-    password = sha256_crypt.encrypt((str(request.form['password'])))
+    password = sha256_crypt.hash((str(request.form['password'])))
 
     user = User()
     user.email = email
@@ -43,6 +67,8 @@ def post_register():
     user.last_name = last_name
     user.password = password
     user.username = username
+    user.authenticated = True
+    user.active = True
 
     db.session.add(user)
     db.session.commit()

@@ -1,4 +1,5 @@
 {% extends "base_col_1.html" %}
+{% from "macros/_macros_form.html" import render_field %}
 {% block title %}Product page{% endblock %}
 
 {% block pageContent %}
@@ -18,36 +19,13 @@
             <div class="panel-footer">
                 <div class="container">
                     <div class="label label-default">Price: {{ product.price }}</div>
-                    <form method="POST" action="/order/add-item">
-                        <input type="hidden" name="product_id" value="{{ product.slug }}" />
+                    <form method="POST">
+                        {{ form.hidden_tag() }}
 
-                        <button type="submit" class="btn btn-success" id="buy-now">Buy Now</button>
+                        <button type="submit" class="btn btn-success" id="buy-now">Add To Cart</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
-<script>
-
-
-    $(function() {
-    $('#buy-nowq').click(function() {
-    console.log('running');
-        $.ajax({
-            url: '/order/add-item',
-            data: $('form').serialize(),
-            type: 'POST',
-            success: function(response) {
-                console.log('a');
-                console.log(response);
-            },
-            error: function(error) {
-                console.log('b');
-                console.log(error);
-            }
-        });
-    });
-});
-</script>
 {% endblock %}
