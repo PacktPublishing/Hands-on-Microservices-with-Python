@@ -16,7 +16,7 @@ Get the IP of the docker machine
 $ docker-machine ip packt-order-management
 ```
 
-# Docker composer
+# Docker compose
 Run the containers
 ```
 $ docker-compose up -d
