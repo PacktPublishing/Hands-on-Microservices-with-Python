@@ -1,0 +1,280 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Order-System",
+		"_postman_id": "5c1ad975-7c9b-38e5-0851-dfc1be3c2c02",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Order",
+			"description": "",
+			"item": [
+				{
+					"name": "Get Order",
+					"request": {
+						"url": "{{URI}}/api/order",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Post Add Item",
+					"request": {
+						"url": "{{URI}}/api/order/add-item",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic $5$rounds=535000$vwJSjz6Q9rFfZg73$JbaCPueXwpbdCOgFz/QqmZL9hHOVluPfpONwNOqvXx8",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"description": "",
+			"item": [
+				{
+					"name": "Get Products",
+					"request": {
+						"url": "{{URI}}/api/products",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Product",
+					"request": {
+						"url": "{{URI}}/api/product/create",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Product 1",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "slug",
+									"value": "product-1",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"value": "banana.png",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "2",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product",
+					"request": {
+						"url": "{{URI}}/api/product/product-1",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"description": null,
+			"item": [
+				{
+					"name": "Register a user",
+					"request": {
+						"url": "{{URI}}/api/user/create",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "first_name",
+									"value": "Peter2",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "Fisher2",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "foof@bar.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "test",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "test",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Get User",
+					"request": {
+						"url": "{{URI}}/api/user",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Post User Logout",
+					"request": {
+						"url": "{{URI}}/api/user/logout",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Copy",
+					"request": {
+						"url": "{{URI}}/api/user/test",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users",
+					"request": {
+						"url": "{{URI}}/api/users",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "POST login",
+					"request": {
+						"url": "{{URI}}/api/user/login",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "test3",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "test3",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Open Order",
+					"request": {
+						"url": "{{URI}}/api/order",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic $5$rounds=535000$QMGhL/W9cFB2uFUA$VyaIhbNBJ5he6hUIK8v7UVBJXo.bExb3rOFbYvU0tJ0",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get User copy",
+					"request": {
+						"url": "{{URI}}/api/user",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": null
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
