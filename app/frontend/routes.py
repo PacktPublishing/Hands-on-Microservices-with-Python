@@ -104,29 +104,13 @@ def product(slug):
 
     form = forms.ItemForm(product_id=item['id'])
 
-    threshold = 5
-
     if request.method == "POST":
 
-        if session['user_api_key']:
-            current_order = OrderClient.post_add_to_cart(product_id=item['id'], qty=1)
+        if not current_user.is_authenticated:
+            flash('Please login')
+            return redirect(url_for('frontend.login'))
 
-            stored_order = current_order['result']
-        else:
-            # not logged in
-            stored_order = OrderClient.get_order_from_session()
-            if item['id'] in stored_order['items']:
-                qty = stored_order['items'][slug] + 1
-                if qty > threshold:
-                    flash('Cannot add any more items', 'error')
-                    stored_order['items'][slug] = max
-                else:
-                    flash('Item added', 'success')
-                    stored_order['items'][slug] += 1
-            else:
-                stored_order['items'].update({slug: 1})
-
-        session['order'] = stored_order
+        OrderClient.post_add_to_cart(product_id=item['id'], qty=1)
 
     return render_template('product/index.html', product=item, form=form)
 
