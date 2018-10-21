@@ -102,14 +102,14 @@ def product(slug):
     response = ProductClient.get_product(slug)
     item = response['result']
 
-    form = forms.ItemForm(product_id=product['id'])
+    form = forms.ItemForm(product_id=item['id'])
 
     threshold = 5
 
     if request.method == "POST":
 
         if session['user_api_key']:
-            current_order = OrderClient.post_add_to_cart(product_id=product['id'], qty=1)
+            current_order = OrderClient.post_add_to_cart(product_id=item['id'], qty=1)
 
             stored_order = current_order['result']
         else:
@@ -128,7 +128,7 @@ def product(slug):
 
         session['order'] = stored_order
 
-    return render_template('product/index.html', product=product, form=form)
+    return render_template('product/index.html', product=item, form=form)
 
 
 # ORDER PAGES
