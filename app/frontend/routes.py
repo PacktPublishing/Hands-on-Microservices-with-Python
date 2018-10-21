@@ -106,11 +106,13 @@ def product(slug):
 
     if request.method == "POST":
 
-        if not current_user.is_authenticated:
-            flash('Please login')
+        if 'user' not in session:
+            flash('Please login', 'error')
             return redirect(url_for('frontend.login'))
 
-        OrderClient.post_add_to_cart(product_id=item['id'], qty=1)
+        order = OrderClient.post_add_to_cart(product_id=item['id'], qty=1)
+        session['order'] = order['result']
+        flash('Order has been updated', 'success')
 
     return render_template('product/index.html', product=item, form=form)
 
@@ -119,52 +121,41 @@ def product(slug):
 
 
 # Order summary  page
-@frontend_blueprint.route('/checkout', methods=['GET', 'POST'])
+@frontend_blueprint.route('/checkout', methods=['GET'])
 def summary():
 
-    if not current_user.is_authenticated:
-        flash('No order found')
+    if 'user' not in session:
+        flash('Please login', 'error')
+        return redirect(url_for('frontend.login'))
+
+    if 'order' not in session:
+        flash('No order found', 'error')
         return redirect(url_for('frontend.home'))
 
     order = OrderClient.get_order()
 
-    class SummaryForm(forms.FlaskForm):
-        pass
-        submit = forms.SubmitField('Update')
+    if len(order['result']['items']) == 0:
+        flash('No order found', 'error')
+        return redirect(url_for('frontend.home'))
 
-    index = 0
-    for row in order['result']['items']:
-        index += 1
-        product_id = forms.HiddenField(validators=[forms.DataRequired()], default=row)
-        choices = [('0', '0'), ('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')]
-        quantity = forms.SelectField(choices=choices, default=row['quantity'])
+    OrderClient.post_checkout()
 
-        setattr(SummaryForm, 'product_id_' + str(index), product_id)
-        setattr(SummaryForm, 'quantity_' + str(index), quantity)
-
-    form = SummaryForm()
-    items = []
-    if request.method == "POST":
-        foo = 0
-        for row in list(order['result']['items']):
-            foo += 1
-
-            payload = {
-                'product_id': form['product_id_' + str(foo)].data,
-                'qty': request.form['quantity_' + str(foo)]
-            }
-            items.append(payload)
-
-        # order = update_order(items)
-
-        flash('Order has been updated', 'success')
-        # session['order'] = order['result']
-
-    return render_template('order/summary.html', order=order, form=form, items=items)
+    return redirect(url_for('frontend.thank_you'))
 
 
 # Order thank you
 @frontend_blueprint.route('/order/thank-you', methods=['GET'])
 def thank_you():
+
+    if 'user' not in session:
+        flash('Please login', 'error')
+        return redirect(url_for('frontend.login'))
+
+    if 'order' not in session:
+        flash('No order found', 'error')
+        return redirect(url_for('frontend.home'))
+
+    session.pop('order', None)
+    flash('Thank you for your order', 'success')
 
     return render_template('order/thankyou.html')

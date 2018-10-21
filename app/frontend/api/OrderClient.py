@@ -44,6 +44,15 @@ class OrderClient:
 
             return order
 
+    @staticmethod
+    def post_checkout():
+        url = 'http://order:5000/api/order/checkout'
+        headers = {
+            'Authorization': 'Basic ' + session['user_api_key']
+        }
+        response = requests.request("POST", url=url, data={}, headers=headers)
+        order = response.json()
+        return order
 
     @staticmethod
     def get_order_from_session():
