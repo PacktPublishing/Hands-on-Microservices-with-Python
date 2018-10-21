@@ -3,6 +3,7 @@ version: '3'
 volumes:
   product-db-data:
   user-db-data:
+  order-db-data:
 
 networks:
   order-network:
@@ -69,3 +70,29 @@ services:
     restart: always
     networks:
       - order-network
+
+
+  order:
+    build:
+      context: ../order_service.git/
+    ports:
+      - 8083:5000
+    volumes:
+      - ../order_service.git/app:/app
+    depends_on:
+      - order_db
+    restart: always
+    networks:
+      - order-network
+
+  order_db:
+    image: mysql:5.7.22
+    volumes:
+      - order-db-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=test
+      - MYSQL_DATABASE=order
+    restart: always
+    networks:
+      - order-network
+
