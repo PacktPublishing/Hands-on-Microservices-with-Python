@@ -1,0 +1,71 @@
+version: '3'
+
+volumes:
+  product-db-data:
+  user-db-data:
+
+networks:
+  order-network:
+    driver: bridge
+
+services:
+  frontend:
+    build:
+      context: .
+    ports:
+      - 80:5000
+    volumes:
+      - ./app:/app
+    restart: always
+    networks:
+      - order-network
+
+  product:
+    build:
+      context: ../product_service.git/
+    ports:
+      - 8081:5000
+    volumes:
+      - ../product_service.git/app:/app
+    links:
+      - product_db
+    depends_on:
+      - product_db
+    restart: always
+    networks:
+      - order-network
+
+  product_db:
+    image: mysql:5.7.22
+    volumes:
+      - product-db-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=test
+      - MYSQL_DATABASE=product
+    restart: always
+    networks:
+      - order-network
+
+  user:
+    build:
+      context: ../user_service.git/
+    ports:
+      - 8082:5000
+    volumes:
+      - ../user_service.git/app:/app
+    depends_on:
+      - user_db
+    restart: always
+    networks:
+      - order-network
+
+  user_db:
+    image: mysql:5.7.22
+    volumes:
+      - user-db-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=test
+      - MYSQL_DATABASE=user
+    restart: always
+    networks:
+      - order-network
