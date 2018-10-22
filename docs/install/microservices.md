@@ -33,7 +33,6 @@ $ docker-machine create packt-order-management
 Start the machine
 
 ```
-```
 $ docker-machine start packt-order-management
 ```
 Update the shell
