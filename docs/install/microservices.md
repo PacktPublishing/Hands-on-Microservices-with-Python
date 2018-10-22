@@ -31,8 +31,7 @@ Create a Docker machine for the project
 $ docker-machine create packt-order-management
 ````
 Start the machine
-```
-$ docker-machine start packt-order-management
+
 ```
 ```
 $ docker-machine start packt-order-management
