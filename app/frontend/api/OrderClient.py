@@ -1,6 +1,7 @@
 from flask import session
 import requests
 
+
 class OrderClient:
 
     @staticmethod
@@ -12,7 +13,6 @@ class OrderClient:
         response = requests.request(method="GET", url='http://order:5000/api/order', headers=headers)
         order = response.json()
         return order
-
 
     @staticmethod
     def update_order(items):
@@ -26,7 +26,6 @@ class OrderClient:
             order = response.json()
 
             return order
-
 
     @staticmethod
     def post_add_to_cart(product_id, qty=1):
