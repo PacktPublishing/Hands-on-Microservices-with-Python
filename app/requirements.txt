@@ -11,7 +11,7 @@ Flask-Login==0.4.1
 Flask-SQLAlchemy==2.3.2
 Flask-WTF==0.14.2
 idna==2.7
-ItsDangerous==1.0.0
+ItsDangerous==1.1.0
 Jinja2==2.10
 MarkupSafe==1.0
 more-itertools==4.3.0
