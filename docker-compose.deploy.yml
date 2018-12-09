@@ -1,6 +1,9 @@
 version: '3'
 
 volumes:
+  product-node-modules:
+  user-node-modules:
+  order-node-modules:
   product-db-data:
   user-db-data:
   order-db-data:
@@ -28,6 +31,7 @@ services:
       - 8081:5000
     volumes:
       - ../product_service.git/app:/app
+      - product-node-modules:/app/node_modules
     links:
       - product_db
     depends_on:
@@ -54,6 +58,7 @@ services:
       - 8082:5000
     volumes:
       - ../user_service.git/app:/app
+      - user-node-modules:/app/node_modules
     depends_on:
       - user_db
     restart: always
@@ -79,6 +84,7 @@ services:
       - 8083:5000
     volumes:
       - ../order_service.git/app:/app
+      - order-node-modules:/app/node_modules
     depends_on:
       - order_db
     restart: always
