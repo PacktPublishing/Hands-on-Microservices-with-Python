@@ -1,0 +1,26 @@
+version: '3'
+
+volumes:
+  db-data:
+
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - 80:5000
+    volumes:
+      - ./app:/app
+    links:
+      - db
+    depends_on:
+      - db
+
+  db:
+    image: mysql:5.7.22
+    volumes:
+      - db-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=test
+      - MYSQL_DATABASE=order
+    restart: always

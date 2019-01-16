@@ -1,0 +1,31 @@
+{% extends "base_col_1.html" %}
+{% from "macros/_macros_form.html" import render_field %}
+{% block title %}Product page{% endblock %}
+
+{% block pageContent %}
+
+    {% set url = "/product/" + product.slug %}
+    {% set imageSRC = "images/" + product.image %}
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">{{product.name}}</h2>
+            </div>
+            <div class="panel-body">
+                <div class="img-block">
+                    <img src="{{ url_for('static', filename=imageSRC)}}" width="100%"/>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="container">
+                    <div class="label label-default">Price: {{ product.price }}</div>
+                    <form method="POST">
+                        {{ form.hidden_tag() }}
+
+                        <button type="submit" class="btn btn-success" id="buy-now">Add To Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
