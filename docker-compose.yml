@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  frontend:
+    build:
+      context: .
+    ports:
+      - 80:5000
+    volumes:
+      - ./app:/app

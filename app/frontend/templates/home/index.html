@@ -1,0 +1,36 @@
+{% extends "base_col_1.html" %}
+{% block title %}Home Page{% endblock %}
+
+{% block pageContent %}
+
+
+{% if products | length > 0 %}
+    {% for product in products.results %}
+
+    {% set url = "/product/" + product.slug %}
+    {% set imageSRC = "images/" + product.image %}
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">{{product.name}}</h2>
+            </div>
+            <div class="panel-body">
+                <div class="img-block">
+                    <img src="{{ url_for('static', filename=imageSRC)}}" width="100%"/>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="container">
+                    <div class="label label-default">Price: {{ product.price }}</div>
+                    <a class="btn btn-success" href="{{url}}">View more</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+{% else %}
+    <strong>No products found</strong>
+{% endif %}
+
+{% endblock %}

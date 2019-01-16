@@ -1,0 +1,104 @@
+version: '3'
+
+volumes:
+  product-node-modules:
+  user-node-modules:
+  order-node-modules:
+  product-db-data:
+  user-db-data:
+  order-db-data:
+
+networks:
+  order-network:
+    driver: bridge
+
+services:
+  frontend:
+    build:
+      context: .
+    ports:
+      - 80:5000
+    volumes:
+      - ./app:/app
+    restart: always
+    networks:
+      - order-network
+
+  product:
+    build:
+      context: ../product_service.git/
+    ports:
+      - 8081:5000
+    volumes:
+      - ../product_service.git/app:/app
+      - product-node-modules:/app/node_modules
+    links:
+      - product_db
+    depends_on:
+      - product_db
+    restart: always
+    networks:
+      - order-network
+
+  product_db:
+    image: mysql:5.7.22
+    volumes:
+      - product-db-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=test
+      - MYSQL_DATABASE=product
+    restart: always
+    networks:
+      - order-network
+
+  user:
+    build:
+      context: ../user_service.git/
+    ports:
+      - 8082:5000
+    volumes:
+      - ../user_service.git/app:/app
+      - user-node-modules:/app/node_modules
+    depends_on:
+      - user_db
+    restart: always
+    networks:
+      - order-network
+
+  user_db:
+    image: mysql:5.7.22
+    volumes:
+      - user-db-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=test
+      - MYSQL_DATABASE=user
+    restart: always
+    networks:
+      - order-network
+
+
+  order:
+    build:
+      context: ../order_service.git/
+    ports:
+      - 8083:5000
+    volumes:
+      - ../order_service.git/app:/app
+      - order-node-modules:/app/node_modules
+    depends_on:
+      - order_db
+    restart: always
+    networks:
+      - order-network
+
+  order_db:
+    image: mysql:5.7.22
+    volumes:
+      - order-db-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=test
+      - MYSQL_DATABASE=order
+    restart: always
+    networks:
+      - order-network
+

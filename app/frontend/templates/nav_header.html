@@ -1,0 +1,19 @@
+{% from "macros/_macros_basket.html" import count_items %}
+<header class="row">
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+            </ul>
+            <ul class="nav navbar-nav pull-right">
+                {% if not session['user'] %}
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/register">Register</a></li>
+                {% else %}
+                    <li><a href="/logout">Logout</a></li>
+                {% endif %}
+                <li><a href="/checkout">Checkout <span class="badge">{{ count_items() }}</span></a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
