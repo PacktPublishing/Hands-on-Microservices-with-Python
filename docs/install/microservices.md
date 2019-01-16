@@ -6,10 +6,10 @@ Create the following project structure
 ```
 $ mkdir code
 $ cd code
-$ git clone git@bitbucket.org:websomatic/frontend_service.git frontend.git
-$ git clone git@bitbucket.org:websomatic/user_service.git user_service.git
-$ git clone git@bitbucket.org:websomatic/product_service.git product_service.git
-$ git clone git@bitbucket.org:websomatic/order_service.git order_service.git
+$ git clone git@github.com:PacktPublishing/Hands-on-Microservices-with-Python.git frontend.git
+$ git clone git@github.com:PacktPublishing/Hands-on-Microservices-with-Python-User-Service.gi user_service.git
+$ git clone git@github.com:PacktPublishing/Hands-on-Microservices-with-Python-Product-Service.git product_service.git
+$ git clone git@github.com:PacktPublishing/Hands-on-Microservices-with-Python-Order-Service.git order_service.git
 ```
 
 You should have the following project structure:
