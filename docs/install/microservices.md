@@ -7,7 +7,7 @@ Create the following project structure
 $ mkdir code
 $ cd code
 $ git clone git@github.com:PacktPublishing/Hands-on-Microservices-with-Python.git frontend.git
-$ git clone git@github.com:PacktPublishing/Hands-on-Microservices-with-Python-User-Service.gi user_service.git
+$ git clone git@github.com:PacktPublishing/Hands-on-Microservices-with-Python-User-Service.git user_service.git
 $ git clone git@github.com:PacktPublishing/Hands-on-Microservices-with-Python-Product-Service.git product_service.git
 $ git clone git@github.com:PacktPublishing/Hands-on-Microservices-with-Python-Order-Service.git order_service.git
 ```
@@ -52,7 +52,7 @@ Install the containers.
 Run the following commands from inside the frontend.git folder.
 
 ```
-$ docker-compose up -d
+$ docker-compose -f docker-compose.deploy.yml up -d
 ```
 Check that all the containers are running
 ```
