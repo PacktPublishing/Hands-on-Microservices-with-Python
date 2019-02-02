@@ -71,5 +71,14 @@ f63fb7b63efb        mysql:5.7.22           "docker-entrypoint.s…"   18 hours a
 ## Product database
 To add products into the product database please follow [this guide](https://github.com/PacktPublishing/Hands-on-Microservices-with-Python-Product-Service/blob/master/docs/install/install.md)
 
-# Run the Application
+# Run the application
 Go to the IP address in a web browser. If you are using Docker Machine then the IP will be the IP of the machine. If you are not using Docker machine the IP will be your local host
+
+## To rebuild the Docker images and recreate the containers
+```
+$ docker-compose -f docker-compose.deploy.yml build
+```
+Then run the following to recreate the containers
+```
+$ docker-compose -f docker-compose.deploy.yml up -d
+```
