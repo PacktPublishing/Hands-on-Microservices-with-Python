@@ -68,5 +68,8 @@ f63fb7b63efb        mysql:5.7.22           "docker-entrypoint.s…"   18 hours a
 798bec4eb1b9        mysql:5.7.22           "docker-entrypoint.s…"   18 hours ago        Up 21 seconds       3306/tcp                 frontendgit_order_db_1
 ```
 
+## Product database
+To add products into the product database please follow [this guide](https://github.com/PacktPublishing/Hands-on-Microservices-with-Python-Product-Service/blob/master/docs/install/install.md)
+
 # Run the Application
 Go to the IP address in a web browser. If you are using Docker Machine then the IP will be the IP of the machine. If you are not using Docker machine the IP will be your local host
