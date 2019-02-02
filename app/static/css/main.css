@@ -3,9 +3,10 @@ body{
 }
 .img-block{
     text-align:center;
+    height:150px;
 }
 .img-block img{
 
-    max-width:200px;
-    max-height:200px;
+    max-width:150px;
+    max-height:150px;
 }
