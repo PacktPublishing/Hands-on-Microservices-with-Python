@@ -18,3 +18,7 @@ Update the shell
 $ docker-machine env packt-order-management
 $ eval $(docker-machine env packt-order-management)
 ```
+Run the containers
+```
+$ docker-compose up -d
+```
