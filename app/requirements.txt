@@ -18,7 +18,7 @@ more-itertools==4.3.0
 mysql-connector==2.2.9
 passlib==1.7.1
 pluggy==0.8.0
-py==1.7.0
+py==1.10.0
 pytest==3.9.1
 requests==2.20.0
 six==1.11.0
