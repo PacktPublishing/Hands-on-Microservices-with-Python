@@ -4,7 +4,7 @@ blinker==1.4
 certifi==2021.10.8
 chardet==4.0.0
 dominate==2.6.0
-Flask-Login==0.5.0
+Flask-Login==0.4.1
 Flask-SQLAlchemy==2.5.1
 flask-swagger-ui==3.36.0
 Flask-Bootstrap>=3.3
