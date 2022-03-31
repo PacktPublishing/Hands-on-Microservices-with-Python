@@ -3,4 +3,6 @@ venv/*
 env/
 **/*.pytest_cache
 app/__pycache__
+app/frontend/__pycache__/
+app/frontend/api/__pycache__/
 **/.DS_Store
